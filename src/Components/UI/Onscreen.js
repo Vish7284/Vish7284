@@ -1,7 +1,7 @@
 import React from "react";
 
 const Onscreen = (props) => {
-  const { voters } = props;
+const {voters} = props;
 
 
   const votesByCandidate = {
@@ -21,15 +21,20 @@ const Onscreen = (props) => {
       <ul>
         {Object.keys(votesByCandidate).map((candidate) => (
           <li key={candidate}>
-            <strong>{candidate}:</strong>
+            <h3>{candidate}:-</h3>
             <ul>
               {votesByCandidate[candidate].map((voterName) => (
-                <li key={voterName}>{voterName}</li>
+                <li key={voterName}>
+                  {voterName}
+                  
+                  <button type="delete" onClick={() =>props.onRemove(voterName)}>
+                    Cancel Vote
+                  </button>
+                </li>
               ))}
             </ul>
             Total votes:{votesByCandidate[candidate].length}
           </li>
-
         ))}
       </ul>
     </div>
