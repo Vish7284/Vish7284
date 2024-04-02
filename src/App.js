@@ -1,33 +1,43 @@
-import React,{useState} from 'react';
-import './App.css';
-import InputForm from './Component/InputForm';
-import UI from './Component/UI';
+import React, { useState } from "react";
+import "./App.css";
+import InputForm from "./Component/InputForm";
+import UI from "./Component/UI";
 function App() {
-  const [data,setData] = useState([]);
-  const [search,setSearch] = useState("");
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const searchChangeHandler=(e)=>{
-    e.preventDefault()
+  const searchChangeHandler = (e) => {
+    e.preventDefault();
     setSearch(e.target.value);
-  }
-  const addChangeHandler =(usedata)=>{
-     setData((prevData)=>{
-      return [usedata,...prevData]
-     })
-  }
+  };
+  const addChangeHandler = (usedata) => {
+    setData((prevData) => {
+      return [usedata, ...prevData];
+    });
+  };
 
   const filteredData = data.filter((item) =>
     item.username.toLowerCase().includes(search.toLowerCase())
   );
-   const total = data.length;
+  const total = filteredData.length;
+  const deleteHandler = (name) => {
+   const updated = filteredData.filter((item) => item.username !== name);
+   // console.log("delete HO GYA");
+   setData(updated)
+  };
   return (
     <div className="App">
       <h1>Jai SiyaRam Jai Hanumaan</h1>
       <h2>Total Password {total}</h2>
-      <label htmlFor='search'>Search:</label>
-      <input type="text" id='search' value={search} onChange={searchChangeHandler}/>
-      <InputForm onAdd={addChangeHandler}/>
-      <UI data={filteredData}/>
+      <label htmlFor="search">Search:</label>
+      <input
+        type="text"
+        id="search"
+        value={search}
+        onChange={searchChangeHandler}
+      />
+      <InputForm onAdd={addChangeHandler} />
+      <UI data={filteredData} onDelete={deleteHandler} />
     </div>
   );
 }
