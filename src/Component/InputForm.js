@@ -19,8 +19,6 @@ const InputForm = () => {
       name: name,
       candidate: cand,
     };
-    // props.onAddVoter(obj);
-    // props.onCancel();
     ctx.addVoterHandler(obj);
     ctx.showAddButton();
     setCand("");
