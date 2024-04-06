@@ -1,8 +1,6 @@
-import React ,{useContext}from "react";
-
+import React from "react";
 
 const UI = (props) => {
-    // const voterCtx = useContext(VoteContext)
   const { voters } = props;
   const votesByCandidate = {
     Bahubali: [],
