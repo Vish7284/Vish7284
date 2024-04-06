@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Modal from "./Reusables/Modal";
-const InputForm = (props) => {
+import { VoteContext } from "../store/vote-context";
+const InputForm = () => {
   const [name, setName] = useState("");
   const [cand, setCand] = useState("");
+  const ctx  = useContext(VoteContext)
 
   const nameChangeHandler = (e) => {
     setName(e.target.value);
@@ -17,8 +19,10 @@ const InputForm = (props) => {
       name: name,
       candidate: cand,
     };
-    props.onAddVoter(obj);
-    props.onCancel();
+    // props.onAddVoter(obj);
+    // props.onCancel();
+    ctx.addVoterHandler(obj);
+    ctx.showAddButton();
     setCand("");
     setName("")
   };
@@ -43,8 +47,8 @@ const InputForm = (props) => {
             <option value="2">Kattappa</option>
             <option value="3">BhallalDev</option>
           </select>
-          <button type="submit" >Vote</button>
-          <button type="cancel" onClick={() => props.onCancel()}>
+          <button type="submit">Vote</button>
+          <button type="cancel" onClick={() => ctx.showAddButton()}>
             X
           </button>
         </form>

@@ -1,14 +1,14 @@
-import React from "react";
+import React,{useContext} from "react";
+import { VoteContext } from "../store/vote-context";
+const UI = () => {
 
-const UI = (props) => {
-  const { voters } = props;
+const voteCtx = useContext(VoteContext)
   const votesByCandidate = {
     Bahubali: [],
     Kattappa: [],
     BhallalDev: [],
   };
-
-  voters.forEach((voter) => {
+  voteCtx.voters.forEach((voter) => {
     votesByCandidate[voter.candidate].push(voter.name);
   });
 
@@ -26,7 +26,7 @@ const UI = (props) => {
 
                   <button
                     type="delete"
-                    onClick={() => props.onRemove(voterName)}
+                    onClick={() => voteCtx.removeHandler(voterName)}
                   >
                     Cancel Vote
                   </button>
